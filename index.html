@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>@avrxt</title>
+    <meta name="description" content="it's just ? - Official Bio Link">
+    <meta name="keywords" content="avrxt, bio, link in bio, discord, instagram, developer">
+    <meta name="author" content="avrxt">
+    <meta name="theme-color" content="#050505">
+
+    <link rel="icon" type="image/webp" href="https://cdn.storage.avrxt.in/assets/IMG_20251108_224641_264.webp">
+    <link rel="apple-touch-icon" sizes="180x180" href="https://cdn.storage.avrxt.in/assets/IMG_20251108_224641_264.webp">
+    <link rel="shortcut icon" href="https://cdn.storage.avrxt.in/assets/IMG_20251108_224641_264.webp">
+
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://its.avrxt.in">
+    <meta property="og:title" content="@avrxt">
+    <meta property="og:description" content="it's just ?">
+    <meta property="og:image" content="https://cdn.storage.avrxt.in/assets/IMG_20251108_224641_264.webp">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://its.avrxt.in">
+    <meta name="twitter:title" content="@avrxt">
+    <meta name="twitter:description" content="it's just ?">
+    <meta name="twitter:image" content="https://cdn.storage.avrxt.in/assets/IMG_20251108_224641_264.webp">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #050505;
+            /* moody dark gradient background */
+            background-image: radial-gradient(circle at 50% 50%, #1a1a2e 0%, #000000 100%);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Poppins', sans-serif;
+            color: white;
+            overflow: hidden;
+            user-select: none; /* Prevent text selection */
+        }
+
+        /* Animated noise background */
+        .bg-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://grainy-gradients.vercel.app/noise.svg');
+            opacity: 0.05;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        /* --- CLICK TO ENTER OVERLAY --- */
+        #enter-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #000;
+            z-index: 9999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: opacity 0.8s ease;
+        }
+
+        #enter-overlay h2 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.5rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            animation: pulse 2s infinite;
+        }
+
+        /* --- MAIN CARD DESIGN --- */
+        .card {
+            width: 90%;
+            max-width: 400px;
+            padding: 40px 20px;
+            border-radius: 20px;
+            text-align: center;
+            
+            /* Glassmorphism Magic */
+            background: rgba(20, 20, 20, 0.6);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 0 40px rgba(0, 0, 0, 0.5);
+            
+            opacity: 0; /* Hidden initially */
+            transform: translateY(20px);
+            transition: opacity 1s ease, transform 1s ease;
+        }
+
+        /* Profile Picture */
+        .pfp-container {
+            position: relative;
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 20px auto;
+        }
+
+        .pfp {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+        }
+
+        .status-dot {
+            position: absolute;
+            bottom: 8px;
+            right: 8px;
+            width: 18px;
+            height: 18px;
+            background-color: #23a559; /* Online Green */
+            border: 3px solid #1a1a1a;
+            border-radius: 50%;
+        }
+
+        /* User Info */
+        .username {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 5px;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+            cursor: pointer; /* Show it interacts */
+        }
+        
+        /* Use Monospace for the shuffle text so letters don't jump width */
+        #shuffle-text {
+            font-family: 'Space Grotesk', monospace;
+            display: inline-block;
+            min-width: 80px; /* Keeps layout stable during shuffle */
+        }
+
+        .bio-text {
+            font-size: 0.9rem;
+            color: #aaaaaa;
+            margin-bottom: 30px;
+            font-weight: 300;
+            font-style: italic;
+        }
+
+        /* --- LINKS --- */
+        .links-container {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .link-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 15px;
+            text-decoration: none;
+            color: white;
+            border-radius: 12px;
+            
+            /* Glass Button */
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .link-btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.3);
+            transform: scale(1.02);
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
+        }
+
+        .link-btn i {
+            font-size: 1.5rem;
+            margin-right: 10px;
+        }
+
+        .link-btn span {
+            font-weight: 500;
+            letter-spacing: 0.5px;
+        }
+
+        .discord:hover { box-shadow: 0 0 20px rgba(88, 101, 242, 0.3); border-color: rgba(88, 101, 242, 0.5); }
+        .instagram:hover { box-shadow: 0 0 20px rgba(225, 48, 108, 0.3); border-color: rgba(225, 48, 108, 0.5); }
+        .email:hover { box-shadow: 0 0 20px rgba(255, 255, 255, 0.3); border-color: rgba(255, 255, 255, 0.5); }
+
+        /* --- ANIMATIONS --- */
+        @keyframes pulse {
+            0% { opacity: 0.5; }
+            50% { opacity: 1; text-shadow: 0 0 15px white; }
+            100% { opacity: 0.5; }
+        }
+
+        .fade-in {
+            opacity: 1 !important;
+            transform: translateY(0) !important;
+        }
+
+        /* Volume Control */
+        #volume-control {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            color: rgba(255,255,255,0.3);
+            font-size: 20px;
+            cursor: pointer;
+            z-index: 100;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="bg-overlay"></div>
+
+    <audio id="bg-music" loop>
+        <source src="https://cdn.storage.avrxt.in/assets/SpotiDownloader.com%20-%20her%20-%20JVKE.mp3" type="audio/mp3">
+    </audio>
+
+    <div id="enter-overlay">
+        <h2>click to enter</h2>
+    </div>
+
+    <div id="volume-control" onclick="toggleMute()">
+        <i class="fas fa-volume-up" id="vol-icon"></i>
+    </div>
+
+    <div class="card" id="main-card">
+        <div class="pfp-container">
+            <img src="https://cdn.storage.avrxt.in/assets/IMG_20251108_224641_264.webp" alt="Profile" class="pfp">
+            <div class="status-dot"></div>
+        </div>
+
+        <div class="username">
+            <span id="shuffle-text" data-value="avrxt">avrxt</span>
+        </div>
+
+        <p class="bio-text">it's just ?</p>
+
+        <div class="links-container">
+            <a href="https://discord.com/avrxt" target="_blank" class="link-btn discord">
+                <i class="fab fa-discord"></i>
+                <span>Discord</span>
+            </a>
+
+            <a href="https://instagram.com/avr.me" target="_blank" class="link-btn instagram">
+                <i class="fab fa-instagram"></i>
+                <span>Instagram</span>
+            </a>
+
+            <a href="mailto:hey@avrxt.in" class="link-btn email">
+                <i class="fas fa-envelope"></i>
+                <span>Email</span>
+            </a>
+        </div>
+    </div>
+
+    <script>
+        const overlay = document.getElementById('enter-overlay');
+        const music = document.getElementById('bg-music');
+        const card = document.getElementById('main-card');
+        const volControl = document.getElementById('volume-control');
+        const volIcon = document.getElementById('vol-icon');
+        
+        // Shuffle Variables
+        const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()";
+        const shuffleElement = document.getElementById("shuffle-text");
+        let interval = null;
+
+        music.volume = 0.5;
+
+        // --- SHUFFLE EFFECT FUNCTION ---
+        const runShuffle = () => {
+            let iteration = 0;
+            const originalText = shuffleElement.dataset.value;
+            
+            clearInterval(interval);
+
+            interval = setInterval(() => {
+                shuffleElement.innerText = originalText
+                    .split("")
+                    .map((letter, index) => {
+                        if(index < iteration) {
+                            return originalText[index];
+                        }
+                        return letters[Math.floor(Math.random() * 26)];
+                    })
+                    .join("");
+
+                if(iteration >= originalText.length) { 
+                    clearInterval(interval);
+                }
+
+                iteration += 1 / 3; // Speed of decoding
+            }, 30);
+        }
+
+        // Run shuffle on Hover
+        shuffleElement.onmouseover = runShuffle;
+
+        // --- CLICK TO ENTER ---
+        overlay.addEventListener('click', () => {
+            music.play().catch(error => {
+                console.log("Audio playback failed:", error);
+            });
+
+            overlay.style.opacity = '0';
+            volControl.style.display = 'block';
+
+            setTimeout(() => {
+                overlay.remove();
+                card.classList.add('fade-in');
+                // Run shuffle once automatically when card appears
+                setTimeout(runShuffle, 500); 
+            }, 800);
+        });
+
+        function toggleMute() {
+            if (music.muted) {
+                music.muted = false;
+                volIcon.classList.replace('fa-volume-mute', 'fa-volume-up');
+            } else {
+                music.muted = true;
+                volIcon.classList.replace('fa-volume-up', 'fa-volume-mute');
+            }
+        }
+        
+        // 3D Tilt Effect
+        document.addEventListener('mousemove', (e) => {
+            if(window.innerWidth > 768) {
+                const x = (window.innerWidth / 2 - e.pageX) / 25;
+                const y = (window.innerHeight / 2 - e.pageY) / 25;
+                card.style.transform = `rotateY(${x}deg) rotateX(${y}deg)`;
+            }
+        });
+    </script>
+</body>
+</html>
