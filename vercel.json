@@ -1,0 +1,35 @@
+{
+  "rewrites": [
+    {
+      "source": "/pfp",
+      "destination": "/pfp.jpg"
+    },
+    {
+      "source": "/song",
+      "destination": "/song.mp3"
+    },
+    {
+      "source": "/privacy",
+      "destination": "/privacy.html"
+    },
+    {
+      "source": "/terms",
+      "destination": "/terms.html"
+    },
+    {
+      "source": "/about",
+      "destination": "/about.html"
+    }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=0, must-revalidate"
+        }
+      ]
+    }
+  ]
+}
