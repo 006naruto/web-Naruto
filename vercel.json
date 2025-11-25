@@ -37,6 +37,13 @@
       "destination": "/api/contact.js"
     }
   ],
+  "redirects": [
+    {
+      "source": "/admin/me",
+      "destination": "https://vercel.com/narutos-projects-bf588620",
+      "permanent": false
+    }
+  ],
   "headers": [
     {
       "source": "/(.*)",
