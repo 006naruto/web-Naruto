@@ -27,6 +27,14 @@
     {
       "source": "/api/subscribe",
       "destination": "/api/subscribe.js"
+    },
+    {
+      "source": "/contact",
+      "destination": "/contact.html"
+    },
+    {
+      "source": "/api/contact",
+      "destination": "/api/contact.js"
     }
   ],
   "headers": [
