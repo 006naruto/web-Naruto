@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Subscribe - Naruto x AxtCity</title>
+    <meta name="theme-color" content="#000000">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Syncopate:wght@400;700&family=Space+Grotesk:wght@300;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background-color: #000000;
+            color: #ffffff;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Space Grotesk', sans-serif;
+            overflow: hidden;
+        }
+
+        .noise {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: url('https://grainy-gradients.vercel.app/noise.svg');
+            opacity: 0.07; z-index: -1; pointer-events: none;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 450px;
+            padding: 40px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(10, 10, 10, 0.8);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 0 50px rgba(255, 0, 0, 0.1);
+            animation: fadeIn 1s ease;
+        }
+
+        .logo {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            margin-bottom: 20px;
+            border: 2px solid #ff0000;
+            object-fit: cover;
+        }
+
+        h1 {
+            font-family: 'Syncopate', sans-serif;
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        p {
+            color: #888;
+            font-size: 0.9rem;
+            margin-bottom: 30px;
+        }
+
+        /* Form Styling */
+        .form-group {
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        input[type="email"] {
+            width: 100%;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid #333;
+            color: #fff;
+            font-family: 'Space Grotesk', sans-serif;
+            outline: none;
+            transition: 0.3s;
+            text-align: center;
+        }
+
+        input[type="email"]:focus {
+            border-color: #ff0000;
+            background: rgba(255, 0, 0, 0.05);
+        }
+
+        button {
+            width: 100%;
+            padding: 15px;
+            background: #ff0000;
+            color: #fff;
+            border: none;
+            font-family: 'Syncopate', sans-serif;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background: #fff;
+            color: #000;
+        }
+
+        button:disabled {
+            background: #333;
+            cursor: not-allowed;
+        }
+
+        #message {
+            margin-top: 20px;
+            font-size: 0.8rem;
+            min-height: 20px;
+        }
+        .success { color: #00ff00; }
+        .error { color: #ff0000; }
+
+        .back-link {
+            display: block;
+            margin-top: 30px;
+            color: #555;
+            text-decoration: none;
+            font-size: 0.8rem;
+        }
+        .back-link:hover { color: #fff; }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body>
+
+    <div class="noise"></div>
+
+    <div class="container">
+        <img src="https://naruto.axtcity.online/pfp" alt="Logo" class="logo">
+        <h1>Join the Void</h1>
+        <p>Get updates from Naruto x AxtCity directly to your inbox.</p>
+
+        <form id="subForm">
+            <div class="form-group">
+                <input type="email" id="email" placeholder="ENTER YOUR EMAIL" required>
+            </div>
+            <button type="submit" id="btn">Subscribe</button>
+        </form>
+
+        <div id="message"></div>
+
+        <a href="/" class="back-link">Return Home</a>
+    </div>
+
+    <script>
+        const form = document.getElementById('subForm');
+        const msg = document.getElementById('message');
+        const btn = document.getElementById('btn');
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const email = document.getElementById('email').value;
+
+            // Loading State
+            btn.innerText = "Processing...";
+            btn.disabled = true;
+            msg.className = '';
+            msg.innerText = '';
+
+            try {
+                const res = await fetch('/api/subscribe', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email })
+                });
+
+                const data = await res.json();
+
+                if (res.ok) {
+                    msg.className = 'success';
+                    msg.innerText = "SUCCESS. WELCOME TO THE CLAN.";
+                    form.reset();
+                    btn.innerText = "Subscribed";
+                } else {
+                    throw new Error(data.error || "Unknown error");
+                }
+            } catch (error) {
+                msg.className = 'error';
+                msg.innerText = error.message.toUpperCase();
+                btn.innerText = "Subscribe";
+                btn.disabled = false;
+            }
+        });
+    </script>
+</body>
+</html>
