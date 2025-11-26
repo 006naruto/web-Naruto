@@ -1,18 +1,20 @@
 {
-  "name": "resend-contact-form-api",
+  "name": "resend-postgres-subscription-api",
   "version": "1.0.0",
-  "description": "API route handler for contact form using Resend.",
-  "main": "contactHandler.js",
+  "description": "API route handler for subscription form using Resend and PostgreSQL.",
+  "main": "subscriptionHandler.js",
   "scripts": {
-    "start": "node contactHandler.js",
+    "start": "node subscriptionHandler.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
+    "pg": "^8.11.3",
     "resend": "^3.2.0"
   },
   "keywords": [
     "vercel",
     "resend",
+    "postgres",
     "api"
   ],
   "author": "",
