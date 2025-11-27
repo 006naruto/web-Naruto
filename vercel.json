@@ -1,0 +1,62 @@
+{
+  "rewrites": [
+    {
+      "source": "/pfp",
+      "destination": "/pfp.jpg"
+    },
+    {
+      "source": "/song",
+      "destination": "/song.mp3"
+    },
+    {
+      "source": "/privacy",
+      "destination": "/privacy.html"
+    },
+    {
+      "source": "/terms",
+      "destination": "/terms.html"
+    },
+    {
+      "source": "/about",
+      "destination": "/about.html"
+    },
+    {
+      "source": "/subscribe",
+      "destination": "/subscribe.html"
+    },
+    {
+      "source": "/api/subscribe",
+      "destination": "/api/subscribe.js"
+    },
+    {
+      "source": "/contact",
+      "destination": "/contact.html"
+    },
+    {
+      "source": "/api/contact",
+      "destination": "/api/contact.js"
+    },
+    {
+      "source": "/api/resend-webhook",
+      "destination": "/api/resend-webhook/route.js"
+    }
+  ],
+  "redirects": [
+    {
+      "source": "/admin/me",
+      "destination": "https://vercel.com/narutos-projects-bf588620",
+      "permanent": false
+    }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=0, must-revalidate"
+        }
+      ]
+    }
+  ]
+}
