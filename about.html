@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-X-Compatible" content="IE=edge">
+    
+    <title>About | Naruto x AxtCity</title>
+    <meta name="description" content="Learn about Arun, a BCA student and developer at axtcity.online.">
+    <meta name="theme-color" content="#000000">
+
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://arun.axtcity.online/about">
+    <meta property="og:title" content="About | Naruto x AxtCity">
+    <meta property="og:description" content="My Void: Arun, BCA Student & Developer.">
+    <meta property="og:image" content="https://arun.axtcity.online/cover.jpg">
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&family=Montserrat:wght@700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* --- RESET & BASE --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            height: 100%;
+        }
+
+        body {
+            background-color: #000000;
+            color: #ffffff;
+            min-height: 100vh; 
+            display: flex;
+            flex-direction: column;
+            justify-content: center; 
+            align-items: center;
+            overflow-x: hidden;
+            font-family: 'Inter', sans-serif;
+            position: relative;
+        }
+
+        /* --- NOISE TEXTURE --- */
+        .noise {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            background: url('https://grainy-gradients.vercel.app/noise.svg');
+            opacity: 0.07;
+            z-index: 1;
+        }
+
+        /* --- TOP LEFT HOME BUTTON (FIXED) --- */
+        .home-link-corner {
+            position: fixed;
+            top: 40px;
+            left: 40px;
+            z-index: 10;
+            /* Added transition for smooth show/hide */
+            transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out; 
+        }
+        
+        /* NEW: Class to hide the button */
+        .home-link-corner.hide {
+            transform: translateY(-80px); /* Move it off-screen upwards */
+            opacity: 0;
+        }
+
+        .home-link {
+            text-decoration: none;
+            color: #fff;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            padding: 5px 0;
+            transition: color 0.3s, letter-spacing 0.3s, opacity 0.3s;
+            opacity: 0.8; 
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .home-link span {
+            position: relative;
+        }
+        
+        .home-link span::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            height: 1px;
+            background: rgba(255, 255, 255, 0.3);
+            transition: background 0.3s, width 0.3s;
+        }
+
+        .home-link:hover {
+            opacity: 1;
+            color: #ffffff;
+            letter-spacing: 3px;
+        }
+
+        .home-link:hover span::after {
+            background: #ffffff;
+        }
+
+        /* --- CONTENT CONTAINER --- */
+        .container {
+            text-align: center;
+            z-index: 2;
+            opacity: 0;
+            animation: fadeIn 2s ease forwards;
+            width: 90%;
+            max-width: 800px;
+            padding: 100px 0 50px 0; 
+        }
+        
+        /* --- ABOUT CONTENT (No Change) --- */
+        .about-content {
+            margin-top: 30px;
+            line-height: 1.8;
+            text-align: left;
+            padding: 0 40px; 
+        }
+
+        .about-content h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 1.2rem;
+            text-transform: uppercase;
+            letter-spacing: 0.2rem;
+            color: #fff;
+            margin-top: 40px;
+            margin-bottom: 15px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding-bottom: 5px;
+        }
+
+        .about-content p {
+            font-family: 'Inter', sans-serif;
+            font-weight: 300;
+            font-size: 0.9rem;
+            color: #aaa;
+            letter-spacing: 0.05rem;
+            margin-bottom: 20px;
+            text-transform: none; 
+            text-align: justify;
+        }
+        
+        .about-content p a {
+            color: #ffffff;
+            text-decoration: none;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+            transition: color 0.3s, border-color 0.3s;
+        }
+
+        .about-content p a:hover {
+            color: #ccc;
+            border-bottom: 1px solid #ccc;
+        }
+
+        .about-content ul {
+            list-style: none;
+            padding-left: 0;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .about-content li {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 400;
+            font-size: 0.7rem;
+            color: #fff;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 5px 12px;
+            border-radius: 3px;
+            letter-spacing: 1px;
+            transition: background 0.3s;
+        }
+
+        .about-content li:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        /* --- TYPOGRAPHY (MAIN HEADINGS) --- */
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 5vw;
+            text-transform: uppercase;
+            letter-spacing: 0.5rem;
+            margin-bottom: 15px;
+            color: transparent;
+            background: linear-gradient(180deg, #ffffff 0%, #666666 100%);
+            background-size: 100% 200%; 
+            -webkit-background-clip: text;
+            background-clip: text;
+            animation: 
+                fadeIn 2s ease forwards,
+                glitch 1.5s infinite alternate,
+                flicker 3s infinite;
+        }
+
+        p.subtitle {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 400;
+            font-size: 1rem;
+            color: #888;
+            letter-spacing: 0.3rem;
+            margin-bottom: 50px;
+            text-transform: uppercase;
+        }
+
+        /* --- ANIMATION (No Changes) --- */
+        @keyframes fadeIn {
+            0% { opacity: 0; transform: translateY(20px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes glitch {
+            0% { background-position: 0% 0%; }
+            40% { background-position: 0% 10%; }
+            60% { background-position: 0% 0%; }
+            80% { background-position: 0% -5%; }
+            100% { background-position: 0% 0%; }
+        }
+
+        @keyframes flicker {
+            0%, 18%, 22%, 25%, 53%, 57%, 100% {
+                text-shadow: 0 0 5px rgba(255, 255, 255, 0.4);
+                opacity: 1;
+            }
+            20%, 24%, 55% {
+                text-shadow: none;
+                opacity: 0.9;
+            }
+        }
+
+        /* --- RESPONSIVE OPTIMIZATION --- */
+        @media (max-width: 768px) {
+            
+            .home-link-corner {
+                top: 20px; 
+                left: 20px;
+            }
+            
+            .container {
+                padding-top: 80px; 
+            }
+            
+            h1 { 
+                font-size: 2.5rem; 
+                letter-spacing: 0.2rem; 
+            }
+            p.subtitle { font-size: 0.7rem; letter-spacing: 0.1rem; }
+            
+            .about-content { padding: 0 15px; } 
+            .about-content h2 { font-size: 1rem; }
+            .about-content p { font-size: 0.8rem; }
+            .about-content li { font-size: 0.6rem; }
+        }
+        
+        @media (max-width: 375px) {
+             h1 { font-size: 2rem; }
+             .about-content h2 { margin-top: 30px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="noise"></div>
+
+    <div class="home-link-corner" id="homeLinkCorner">
+        <a href="https://naruto.axtcity.online" class="home-link" title="Back to Home">
+            <i class="fas fa-arrow-left"></i> 
+            <span>Home</span>
+        </a>
+    </div>
+
+    <div class="container">
+        <h1>About</h1>
+        <p class="subtitle">The Core: Arun Mohan</p>
+        
+        <div class="about-content">
+            <p>
+                Hey, Welcome to My Void. My name is Arun Mohan, and I am currently navigating the world as a BCA (Bachelor of Computer Applications) student. This journey provides the theoretical foundation for my practical passion: development. I am a hands-on developer contributing to the ecosystem at <a href="https://axtcity.online" target="_blank">axtcity.online</a>.
+            </p>
+
+            <p>
+                My work centers on transforming abstract ideas into concrete digital experiences. I believe in clean code, efficient solutions, and designs that communicate power through simplicity. Whether it's building robust backend logic or crafting modern front-end aesthetics, the goal remains the same: to build the next level of digital architecture.
+            </p>
+
+            <h2>Core Competencies / Stack</h2>
+            <ul>
+                <li>JavaScript (ES6+)</li>
+                <li>HTML5 / CSS3</li>
+                <li>React.js / Next.js</li>
+                <li>Node.js / Express</li>
+                <li>Database (SQL/NoSQL)</li>
+                <li>Git / GitHub</li>
+                <li>Web Design</li>
+            </ul>
+
+            <h2>Philosophy / The Void</h2>
+            <p>
+                The "Void" represents a space of limitless creativity and focus—a place where noise fades and only the code remains. This philosophy drives my approach to every project, demanding precision, high performance, and continuous self-improvement. I am constantly exploring new frameworks and pushing the boundaries of what I can build next.
+            </p>
+
+        </div>
+        
+    </div>
+
+    <script>
+        // JavaScript to hide the button when scrolling down and show it when scrolling up
+
+        const homeLink = document.getElementById('homeLinkCorner');
+        let lastScrollTop = 0;
+        const scrollThreshold = 100; // Only start hiding after scrolling 100px down
+
+        window.addEventListener('scroll', function() {
+            const currentScrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+            if (currentScrollTop > lastScrollTop && currentScrollTop > scrollThreshold) {
+                // Scrolling Down (and past the initial threshold)
+                homeLink.classList.add('hide');
+            } else {
+                // Scrolling Up or Near the Top
+                homeLink.classList.remove('hide');
+            }
+            
+            // Update the last scroll position
+            lastScrollTop = currentScrollTop <= 0 ? 0 : currentScrollTop; 
+        });
+    </script>
+
+</body>
+</html>
