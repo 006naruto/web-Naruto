@@ -2,21 +2,13 @@
   "name": "resend-postgres-subscription-api",
   "version": "1.0.0",
   "description": "API route handler for subscription form using Resend and PostgreSQL.",
+  "type": "module",
   "main": "subscriptionHandler.js",
   "scripts": {
-    "start": "node subscriptionHandler.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node subscriptionHandler.js"
   },
   "dependencies": {
     "pg": "^8.11.3",
     "resend": "^3.2.0"
-  },
-  "keywords": [
-    "vercel",
-    "resend",
-    "postgres",
-    "api"
-  ],
-  "author": "",
-  "license": "ISC"
+  }
 }
